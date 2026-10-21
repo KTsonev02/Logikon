@@ -1,0 +1,22 @@
+(()=>{'use strict';
+const isSeason=()=>document.body.classList.contains('halloween');
+// Keep the native details dropdown above all transformed/decorative layers.
+const menu=document.querySelector('.more-games'),panel=menu?.querySelector('.more-games-menu');
+function positionMenu(){if(!menu?.open||!panel)return;const r=menu.querySelector('summary').getBoundingClientRect();const width=Math.min(300,innerWidth-20);panel.style.width=width+'px';panel.style.top=Math.min(r.bottom+8,innerHeight-100)+'px';panel.style.left=Math.max(10,Math.min(r.right-width,innerWidth-width-10))+'px'}
+menu?.addEventListener('toggle',positionMenu);window.addEventListener('resize',positionMenu);window.addEventListener('scroll',positionMenu,{passive:true,capture:true});
+document.addEventListener('click',e=>{if(menu?.open&&!menu.contains(e.target))menu.open=false});
+// Original authored cobweb asset (no third-party model redistribution).
+const websvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none" stroke="#c9c2ce" stroke-width="1.5" aria-hidden="true"><g opacity=".85"><path d="M0 0H238M0 0V238M0 0L240 240M0 0L238 115M0 0L116 238M0 0L238 55M0 0L56 238M0 0L238 185M0 0L185 238"/><path d="M34 0Q27 27 0 34M72 0Q55 57 0 72M110 0Q84 88 0 110M150 0Q112 116 0 150M190 0Q143 146 0 190M235 0Q172 171 0 235"/><path d="M0 42Q34 40 40 0M0 90Q76 76 90 0M0 135Q110 112 135 0M0 180Q140 146 180 0M0 228Q175 178 228 0"/></g></svg>`;
+const uri='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(websvg);
+function addWebs(){if(!isSeason()||document.querySelector('.halloween-cobweb'))return;for(const right of [false,true]){const el=document.createElement('img');el.className='halloween-cobweb'+(right?' right':'');el.alt='';el.src=uri;document.body.append(el)}}
+function addSpiders(){if(!isSeason()||document.querySelector('.halloween-edge-spider'))return;
+const spider=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110" aria-hidden="true"><g fill="none" stroke="#24101c" stroke-width="7" stroke-linecap="round"><path d="M43 52 21 30 6 27M41 59 18 51 3 60M41 66 19 78 8 96M57 52 79 30 94 27M59 59 82 51 97 60M59 66 81 78 92 96"/></g><ellipse cx="50" cy="68" rx="22" ry="28" fill="#24101c" stroke="#a85c73" stroke-width="2"/><circle cx="50" cy="41" r="17" fill="#28101b"/><circle cx="44" cy="39" r="3.5" fill="#ff8e44"/><circle cx="56" cy="39" r="3.5" fill="#ff8e44"/><path d="M43 80 50 88 57 80" stroke="#c57a5c" stroke-width="2" fill="none"/></svg>`;
+for(const side of ['left','right']){const el=document.createElement('div');el.className='halloween-edge-spider '+side;el.setAttribute('aria-hidden','true');el.innerHTML=spider;document.body.append(el)}}
+let enabled=localStorage.getItem('logikon_scares_enabled')!=='false',last=0,playing=false;
+const button=document.createElement('button');button.className='halloween-scare-switch';button.type='button';function label(){button.textContent='👻 Стряскания: '+(enabled?'ВКЛ':'ИЗКЛ')}label();button.onclick=()=>{enabled=!enabled;localStorage.setItem('logikon_scares_enabled',String(enabled));label()};
+const overlay=document.createElement('div');overlay.className='halloween-scare';overlay.setAttribute('aria-hidden','true');overlay.innerHTML='<div class="specter">👻</div>';
+function scare(){if(!isSeason()||!enabled||playing||document.hidden||document.fullscreenElement||document.body.classList.contains('word-focused')||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const now=Date.now();if(now-last<75000)return;last=now;playing=true;overlay.querySelector('.specter').textContent=['👻','💀','🦇'][Math.floor(Math.random()*3)];overlay.classList.add('visible');setTimeout(()=>{overlay.classList.remove('visible');setTimeout(()=>playing=false,450)},900)}
+function schedule(){setTimeout(()=>{scare();schedule()},90000+Math.random()*90000)}
+function init(){if(!isSeason())return;addWebs();addSpiders();document.body.append(button,overlay);schedule()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();

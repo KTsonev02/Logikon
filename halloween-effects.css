@@ -1,0 +1,29 @@
+
+/* V26 navigation layer: above all Halloween artwork */
+body .topbar{position:relative!important;z-index:90000!important;isolation:auto!important;overflow:visible!important}
+body .topbar nav{overflow:visible!important;position:relative;z-index:90001!important}
+body .more-games{z-index:90002!important;overflow:visible!important}
+body .more-games-menu{position:fixed!important;z-index:999999!important;max-height:min(65vh,550px);overflow-y:auto!important;background:#21132ff5!important;border:1px solid #ffad70!important;box-shadow:0 25px 75px #000e!important;backdrop-filter:blur(20px)}
+body .more-games[open] summary{background:#44244d;color:#ffe3be}
+.halloween-cobweb{position:fixed;top:0;left:0;width:min(240px,24vw);height:auto;z-index:80;pointer-events:none;opacity:.64;filter:drop-shadow(0 3px 5px #0009);transform:perspective(500px) rotateY(-13deg);transform-origin:top left}
+.halloween-cobweb.right{left:auto;right:0;transform:scaleX(-1) perspective(500px) rotateY(-13deg)}
+.halloween-scare{position:fixed;inset:0;display:grid;place-items:center;z-index:9999999;pointer-events:none;opacity:0;transition:opacity .18s ease;background:radial-gradient(ellipse,#421e3b70,transparent 70%)}
+.halloween-scare.visible{opacity:1}
+.halloween-scare .specter{font-size:clamp(110px,23vw,300px);line-height:1;filter:drop-shadow(0 0 35px #e777cc);transform:scale(.65) rotate(-7deg);transition:transform .65s cubic-bezier(.15,1.2,.3,1)}
+.halloween-scare.visible .specter{transform:scale(1.12) rotate(3deg)}
+.halloween-scare-switch{position:fixed;right:16px;bottom:75px;z-index:1400;border:1px solid #ab759d;border-radius:100px;background:#24142ee8;color:#ffe1cb;padding:9px 12px;font:600 12px system-ui;cursor:pointer}
+@media(max-width:700px){.halloween-cobweb{width:95px;opacity:.4}.halloween-scare-switch{right:9px;bottom:68px}}
+@media(prefers-reduced-motion:reduce){.halloween-scare,.halloween-scare .specter{transition:none!important}}
+/* v27: fixed Halloween border ornaments, independent of scroll and game pages */
+.halloween-cobweb{width:clamp(130px,19vw,270px)!important;opacity:.86!important;z-index:110!important;filter:drop-shadow(0 0 10px #b879e577)!important}
+.halloween-edge-spider{position:fixed;z-index:112;pointer-events:none;width:clamp(30px,4.2vw,58px);height:auto;filter:drop-shadow(0 0 7px #e29a55a8);animation:spider-sway 6s ease-in-out infinite;transform-origin:50% -85px}
+.halloween-edge-spider.left{left:clamp(18px,7vw,105px);top:clamp(96px,13vw,172px)}
+.halloween-edge-spider.right{right:clamp(17px,7vw,102px);top:clamp(120px,16vw,210px);animation-delay:-2.4s}
+.halloween-edge-spider::before{content:'';position:absolute;left:50%;bottom:90%;height:90px;width:1px;background:linear-gradient(transparent,#d3c6e7b8)}
+.halloween-edge-spider svg{width:100%;height:auto;display:block}
+@keyframes spider-sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(6deg)}}
+@media(max-width:700px){.halloween-cobweb{width:110px!important;opacity:.67!important}.halloween-edge-spider{width:31px}.halloween-edge-spider.left{left:24px;top:82px}.halloween-edge-spider.right{right:24px;top:116px}}
+@media(prefers-reduced-motion:reduce){.halloween-edge-spider{animation:none!important}}
+
+/* v28: pin the mirrored cobweb to the actual viewport edge, not layout containers */
+html body img.halloween-cobweb.right{position:fixed!important;top:0!important;right:0!important;left:auto!important;inset-inline-end:0!important;inset-inline-start:auto!important;transform:scaleX(-1)!important;transform-origin:center top!important;margin:0!important;max-width:none!important;}
