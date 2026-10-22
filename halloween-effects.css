@@ -27,3 +27,49 @@ body .more-games[open] summary{background:#44244d;color:#ffe3be}
 
 /* v28: pin the mirrored cobweb to the actual viewport edge, not layout containers */
 html body img.halloween-cobweb.right{position:fixed!important;top:0!important;right:0!important;left:auto!important;inset-inline-end:0!important;inset-inline-start:auto!important;transform:scaleX(-1)!important;transform-origin:center top!important;margin:0!important;max-width:none!important;}
+
+/* v29 readable buttons, login, animated Halloween effects */
+body.halloween .hero-actions .secondary,body.halloween.light .hero-actions .secondary{background:#fff0df!important;color:#251326!important;border-color:#e7b88f!important;text-shadow:none!important;font-weight:800!important}
+body.halloween .hero-actions .secondary:hover{background:#ffcf9e!important;color:#190b21!important}
+.login-nav{flex-shrink:0;border:1px solid #bc8cba;border-radius:13px;background:#422647;color:#fff1df;font-weight:800;padding:11px 17px;cursor:pointer;white-space:nowrap}
+.login-nav:hover{background:#6c3a61}.topbar{gap:12px}.topbar nav{min-width:0}
+.logikon-auth-backdrop{position:fixed;inset:0;background:#090511dd;display:grid;place-items:center;z-index:10000020;padding:16px;backdrop-filter:blur(9px)}
+.logikon-auth-panel{width:min(420px,100%);padding:26px;border-radius:24px;border:1px solid #bb7caa;background:#24152e;color:#ffeede;box-shadow:0 24px 100px #000c;position:relative}
+.logikon-auth-panel h2{margin:0 0 10px}.logikon-auth-panel p{color:#e1c9da}.logikon-auth-panel label{display:block;margin:12px 0 5px}.logikon-auth-panel input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #b77f9f;border-radius:10px;background:#fff;color:#23152b;font-size:16px}
+.logikon-auth-panel button{padding:11px 15px;border-radius:10px;border:0;background:#ffad63;color:#211021;font-weight:800;cursor:pointer;margin:10px 6px 0 0}.logikon-auth-panel .auth-close{position:absolute;top:8px;right:8px}.logikon-auth-panel .auth-message{min-height:22px;color:#ffceaa}
+.halloween-scare{background:transparent!important;overflow:hidden}.halloween-scare .specter{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform:none!important;filter:none!important}
+.halloween-scare .specter img{width:min(56vw,510px);height:min(75vh,610px);object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 0 16px #9d65b8);animation:scare-pop 2.6s ease-out both}
+.halloween-scare[data-kind="spider"] .specter{justify-content:flex-end;align-items:flex-end}.halloween-scare[data-kind="spider"] img{width:min(45vw,430px);height:auto;max-height:65vh}
+.halloween-scare[data-kind="ghost"] .specter{justify-content:flex-start}.halloween-scare[data-kind="ghost"] img{width:min(34vw,340px);height:auto}
+.halloween-scare[data-kind="skeleton-dance"] img{width:min(55vw,480px);height:auto}
+@keyframes scare-pop{0%{opacity:0;transform:translateY(70px) scale(.3)}18%{opacity:1;transform:translateY(0) scale(1.2)}72%{opacity:1;transform:scale(1.08)}100%{opacity:0;transform:translateY(-25px) scale(.94)}}
+@media(max-width:650px){.login-nav{padding:8px 10px;font-size:12px}.halloween-scare .specter img{width:min(82vw,420px)}.halloween-scare[data-kind="spider"] img{width:72vw}.halloween-scare[data-kind="ghost"] img{width:62vw}}
+@media(prefers-reduced-motion:reduce){.halloween-scare .specter img{animation:none!important}}
+
+/* v30 fixes */
+body.halloween{isolation:isolate}
+body.halloween .halloween-cobweb,body.halloween .halloween-edge-spider{z-index:0!important}
+body.halloween .halloween-cobweb{opacity:.42!important}
+body.halloween .halloween-edge-spider{opacity:.65}
+body.halloween .topbar,body.halloween main,body.halloween footer,body.halloween .ad-placeholder{position:relative;z-index:1}
+body.halloween .topbar{z-index:90000!important}
+body.halloween .topbar nav{z-index:90001!important}
+body.halloween .more-games-menu{z-index:999999!important}
+body.halloween .topbar .nav,body.halloween .topbar .more-games summary{color:#f7e5ef!important;text-shadow:none!important}
+body.halloween .topbar .nav.active,body.halloween .topbar .nav:hover,body.halloween .topbar .more-games[open] summary,body.halloween .topbar .more-games summary:hover{background:#51305b!important;color:#fff5df!important}
+body.halloween .topbar .login-nav{background:#633b67!important;color:#fff5e9!important}
+body.halloween .topbar .iconbtn{color:#ffe7d2!important}
+body.halloween .hero-actions button.secondary,body.halloween .hero-actions .secondary,body.halloween.light .hero-actions button.secondary{background:#fff0df!important;color:#24112a!important;-webkit-text-fill-color:#24112a!important;text-shadow:none!important}
+body.halloween .hero-actions button.primary{color:#211022!important;-webkit-text-fill-color:#211022!important}
+body.halloween.light .topbar .nav,body.halloween.light .topbar .more-games summary{color:#f7e5ef!important}
+body.halloween .halloween-scare-switch{right:16px;bottom:116px}
+body.halloween .halloween-scare-test{position:fixed;right:16px;bottom:164px;z-index:1400;border:1px solid #d39c83;border-radius:100px;background:#3d2347;color:#fff1dd;padding:9px 12px;font:700 12px system-ui;cursor:pointer}
+@media(max-width:700px){body.halloween .halloween-scare-switch{bottom:111px;right:9px}body.halloween .halloween-scare-test{bottom:158px;right:9px}}
+
+/* v31: guaranteed top-layer jump scares */
+body.halloween .halloween-scare{position:fixed!important;inset:0!important;z-index:2147483646!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;display:flex!important;align-items:center!important;justify-content:center!important;transform:none!important;isolation:isolate!important}
+body.halloween .halloween-scare.visible{opacity:1!important;visibility:visible!important}
+body.halloween .halloween-scare .specter{position:absolute!important;inset:0!important;display:flex!important;align-items:center!important;justify-content:center!important;z-index:1!important}
+body.halloween .halloween-scare .specter img{display:block!important;opacity:1;mix-blend-mode:normal!important;animation:scare-pop 2.5s ease-out both!important}
+body.halloween .halloween-scare-test{z-index:2147483645!important}
+@media(prefers-reduced-motion:reduce){body.halloween .halloween-scare .specter img{animation:none!important;opacity:1!important}}
