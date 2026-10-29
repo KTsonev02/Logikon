@@ -1,7 +1,7 @@
 (()=>{'use strict';
 const TZ='Europe/Sofia';
 const date=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-const season=()=>{const [y,m,d]=date().split('-').map(Number);return m===10&&d>=(y===2026?29:25)&&d<=31};
+const season=()=>{const [y,m,d]=date().split('-').map(Number);return m===10&&d>=(y===2026?21:25)&&d<=31};
 if(!season())return;
 const ITEMS=[['pumpkin','🎃','Прокълната тиква'],['bat','🦇','Нощен прилеп'],['key','🗝️','Ръждив ключ'],['candle','🕯️','Тъмна свещ'],['spider','🕷️','Паяк'],['potion','🧪','Отвара'],['ghost','👻','Призрак'],['skull','💀','Череп']];
 const ROUTES=['home','word','palindrome','connections','guardians','safe','pirates','differences'];
